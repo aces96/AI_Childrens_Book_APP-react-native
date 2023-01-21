@@ -22,7 +22,7 @@ export const SignIn = ()=>{
         },
         title: {
             fontSize: 40,
-            color: 'black',
+            color: 'rgba(0,158,255, 0.6)',
             textAlign: 'center',
             marginBottom: 20,
             fontFamily: 'Roboto-Bold'

@@ -20,9 +20,8 @@ export const SignUp = ()=>{
         },
         title: {
             fontSize: 40,
-            color: 'black',
-            textAlign: 'left',
-            marginLeft: 20,
+            color: 'rgba(0,158,255, 0.6)',
+            textAlign: 'center',
             marginBottom: 20,
             fontFamily: 'Roboto-Bold'
         },
