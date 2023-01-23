@@ -2,6 +2,30 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/ACaslonPro-Bold.ttf",
+      "sha1": "d8a09bae54086670f3158ad18f1f18c3d886b2c1"
+    },
+    {
+      "path": "src/assets/fonts/ACaslonPro-BoldItalic.ttf",
+      "sha1": "ed6e0ec9d93f0c832aead9e833733e3444ad4c7a"
+    },
+    {
+      "path": "src/assets/fonts/ACaslonPro-Italic.ttf",
+      "sha1": "ee9ed610e821e0dadb99ea3c0062cbbb7fb87645"
+    },
+    {
+      "path": "src/assets/fonts/ACaslonPro-Regular.ttf",
+      "sha1": "a6daf717756ea2fe0297a68ba78454d1ebd1ddb5"
+    },
+    {
+      "path": "src/assets/fonts/ACaslonPro-Semibold.ttf",
+      "sha1": "482202e5b183247d91f146a5435690f794148120"
+    },
+    {
+      "path": "src/assets/fonts/ACaslonPro-SemiboldItalic.ttf",
+      "sha1": "e966efd97559d0efb7c8cbca767631b54e403e49"
+    },
+    {
       "path": "src/assets/fonts/Roboto-Black.ttf",
       "sha1": "3f8e401d808f6ce84b542266726514ac8be73171"
     },
@@ -48,6 +72,10 @@
     {
       "path": "src/assets/fonts/Roboto-ThinItalic.ttf",
       "sha1": "cc79d5a23bd0ec08b1d99f5390bf33cacc3082f4"
+    },
+    {
+      "path": "src/assets/fonts/Solitreo-Regular.ttf",
+      "sha1": "dc943deaad73e3caa2afe500873854c41fc0795a"
     }
   ]
 }

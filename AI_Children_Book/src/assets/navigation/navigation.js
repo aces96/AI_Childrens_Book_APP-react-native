@@ -5,6 +5,7 @@ import { SignUp } from '../../screens/signup';
 import { SignIn } from '../../screens/signin';
 import { Home } from '../../screens/home';
 import { TabNavigator } from './tab.navigation';
+import { History } from '../../screens/history';
 
 
 
@@ -17,11 +18,12 @@ export const Navigation = ()=>{
 
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='profil'>
+            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='history'>
                 <Stack.Screen name='signup' component={SignUp}/>
                 <Stack.Screen name='signin' component={SignIn}/>
                 <Stack.Screen name='home' component={Home}/>
                 <Stack.Screen name='profil' component={TabNavigator}/>
+                <Stack.Screen name='history' component={History}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

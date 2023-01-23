@@ -65,6 +65,13 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Thin.ttf</string>
 		<string>Roboto-ThinItalic.ttf</string>
+		<string>ACaslonPro-Bold.ttf</string>
+		<string>ACaslonPro-BoldItalic.ttf</string>
+		<string>ACaslonPro-Italic.ttf</string>
+		<string>ACaslonPro-Regular.ttf</string>
+		<string>ACaslonPro-Semibold.ttf</string>
+		<string>ACaslonPro-SemiboldItalic.ttf</string>
+		<string>Solitreo-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
