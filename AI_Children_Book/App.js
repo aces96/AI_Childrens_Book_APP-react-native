@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,14 +10,10 @@ import {
   View,
 } from 'react-native';
 import { Navigation } from './src/assets/navigation/navigation';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { StripeProvider } from '@stripe/stripe-react-native';
+import {STRIPE_KEY} from "@env"
+import { Provider } from 'react-redux'
+import { store } from './src/assets/redux/store';
 
 
 
@@ -28,14 +24,18 @@ function App(){
 
 
   return (
-    <SafeAreaView  style={{flex: 1}}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={'transparent'}
-      />
-      <Navigation/>
+    <Provider store={store}>
+      <StripeProvider  publishableKey={STRIPE_KEY}>
+        <SafeAreaView  style={{flex: 1}}>
+          <StatusBar
+            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+            backgroundColor={'transparent'}
+          />
+          <Navigation/>
 
-    </SafeAreaView>
+        </SafeAreaView>
+      </StripeProvider>
+    </Provider>
   );
 }
 

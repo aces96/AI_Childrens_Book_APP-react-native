@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Image, TextInput, TouchableOpacity, Text } from 'react-native'
+import { View, StyleSheet, Image, TextInput, TouchableOpacity, Text, ActivityIndicator } from 'react-native'
 
 
 
@@ -7,18 +7,8 @@ import { View, StyleSheet, Image, TextInput, TouchableOpacity, Text } from 'reac
 
 export const ImageView = ()=>{
 
-    const style = StyleSheet.create({
-        imageCont: {
-            height: '35%',
-            alignItems: 'center',
-            justifyContent: 'center'
-        }
-    })
-
     return (
-        <View style={style.imageCont}>
-            <Image style={{maxHeight: 300, maxWidth: 300}} source={require("../../assets/images/kid.jpg")}/>
-        </View>
+            <Image style={{maxHeight: 200, maxWidth: 200, alignSelf: 'center'}} source={require("../../assets/images/kid.jpg")}/>
     )
 }
 
@@ -32,19 +22,19 @@ export const EmailInput = (props)=>{
             width: '90%',
             alignSelf: 'center',
             borderWidth: 2,
-            borderColor: '#009EFF',
             borderRadius: 15,
             elevation: 3,
             shadowColor: '#009EFF',
             backgroundColor: 'white',
-            paddingLeft: 10
+            paddingLeft: 10,
+            color: 'black'
         }
     })
 
     return (
         <TextInput onChangeText={(e)=>{
             props.handleChange(e)
-        }} value={props.value} style={style.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'email@email.com'} />
+        }} value={props.value} style={{...style.input, borderColor: props.error ? 'rgb(255,148,148)' : '#009EFF'    }} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'email@email.com'} />
     )
 }
 
@@ -57,21 +47,19 @@ export const FullNameInput = (props)=>{
             width: '90%',
             alignSelf: 'center',
             borderWidth: 2,
-            borderColor: '#009EFF',
             borderRadius: 15,
             elevation: 3,
             shadowColor: '#009EFF',
             backgroundColor: 'white',
-            paddingLeft: 10
-
-
+            paddingLeft: 10,
+            color: 'black'
         }
     })
 
     return (
         <TextInput onChangeText={(e)=>{
             props.handleChange(e)
-        }} value={props.value} style={style.input} placeholder={'Fullname'} placeholderTextColor={'rgba(0,0,0,0.5)'} />
+        }} value={props.value} style={{...style.input, borderColor: props.error ? 'rgb(255,148,148)' : '#009EFF'    }} placeholder={'Fullname'} placeholderTextColor={'rgba(0,0,0,0.5)'} />
     )
 }
 
@@ -83,12 +71,12 @@ export const PasswordInput = (props)=>{
             width: '90%',
             alignSelf: 'center',
             borderWidth: 2,
-            borderColor: '#009EFF',
             borderRadius: 15,
             elevation: 3,
             shadowColor: '#009EFF',
             backgroundColor: 'white',
-            paddingLeft: 10
+            paddingLeft: 10,
+            color: 'black'
 
         }
     })
@@ -96,7 +84,7 @@ export const PasswordInput = (props)=>{
     return (
         <TextInput onChangeText={(e)=>{
             props.handleChange(e)
-        }} secureTextEntry={true} value={props.value} style={style.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'Password'} />
+        }} secureTextEntry={true} value={props.value} style={{...style.input, borderColor: props.error ? 'rgb(255,148,148)' : '#009EFF'    }} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'Password'} />
     )
 }
 
@@ -108,12 +96,12 @@ export const RePasswordInput = (props)=>{
             width: '90%',
             alignSelf: 'center',
             borderWidth: 2,
-            borderColor: '#009EFF',
             borderRadius: 15,
             elevation: 3,
             shadowColor: '#009EFF',
             backgroundColor: 'white',
-            paddingLeft: 10
+            paddingLeft: 10,
+            color: 'black'
 
         }
     })
@@ -121,12 +109,12 @@ export const RePasswordInput = (props)=>{
     return (
         <TextInput onChangeText={(e)=>{
             props.handleChange(e)
-        }} secureTextEntry={true} value={props.value} style={style.input} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'retype the Password'} />
+        }} secureTextEntry={true} value={props.value} style={{...style.input, borderColor: props.error ? 'rgb(255,148,148)' : '#009EFF'    }} placeholderTextColor={'rgba(0,0,0,0.5)'} placeholder={'retype the Password'} />
     )
 }
 
 
-export const SubmitButton = ()=>{
+export const SubmitButton = (props)=>{
 
     const style = StyleSheet.create({
         button : {
@@ -137,15 +125,17 @@ export const SubmitButton = ()=>{
             alignItems: 'center',
             alignSelf: 'center',
             borderRadius: 15,
-            
         }
     })
 
     return (
-        <TouchableOpacity style={style.button}>
+        <TouchableOpacity  onPress={()=>props.handleSubmit()} style={style.button}>
+            {props.disabled ? 
+                <ActivityIndicator size={35} color='white'/>
+            : 
             <Text style={{fontSize: 15, color: 'white'}}>
-                Submit
-            </Text>
+            Submit
+            </Text>}
         </TouchableOpacity>
     )
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { useNavigation } from "@react-navigation/native";
 
 
 
 
 export const SettingsHistoryButton = ()=>{
+
+    const navigation = useNavigation()
 
     const style = StyleSheet.create({
         container: {
@@ -43,7 +46,7 @@ export const SettingsHistoryButton = ()=>{
 
     return (
         <View style={style.container}>
-            <TouchableOpacity style={style.button}>
+            <TouchableOpacity onPress={()=>navigation.navigate('history')} style={style.button}>
             <View style={{width: "40%", height: '100%', flexDirection: 'row'}}>
                     <View style={style.icon}>
                         <MaterialIcons name="history" color={'rgba(0,0,0,0.5)'} size={30}/>
@@ -229,6 +232,8 @@ export const SettingsFeedbackButton = ()=>{
 
 export const SettingsPurchaseButton = ()=>{
 
+    const navigation = useNavigation()
+
     const style = StyleSheet.create({
         container: {
             width: '100%',
@@ -265,7 +270,7 @@ export const SettingsPurchaseButton = ()=>{
 
     return (
         <View style={style.container}>
-            <TouchableOpacity style={style.button}>
+            <TouchableOpacity onPress={()=>navigation.navigate('purchase')} style={style.button}>
                 <View style={{width: "40%", height: '100%', flexDirection: 'row'}}>
                     <View style={style.icon}>
                         <MaterialIcons name="shopping-cart" color={'rgba(0,0,0,0.5)'} size={30}/>
@@ -282,6 +287,8 @@ export const SettingsPurchaseButton = ()=>{
     )
 }
 export const SettingsLogOutButton = ()=>{
+
+    const navigation = useNavigation()
 
     const style = StyleSheet.create({
         container: {
@@ -320,7 +327,7 @@ export const SettingsLogOutButton = ()=>{
 
     return (
         <View style={style.container}>
-            <TouchableOpacity style={style.button}>
+            <TouchableOpacity onPress={()=>navigation.navigate('signin')} style={style.button}>
                 <View style={{width: "40%", height: '100%', flexDirection: 'row'}}>
                     <View style={style.icon}>
                         <MaterialIcons name="logout" color={'rgba(255,0,0, 0.5)'} size={30}/>

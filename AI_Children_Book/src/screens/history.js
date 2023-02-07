@@ -2,11 +2,13 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { HistoryStories } from "../components/history.component/components";
-
+import { useNavigation } from "@react-navigation/native";
 
 
 
 export const History = ()=>{
+    
+    const navigation = useNavigation()
 
     const style = StyleSheet.create({
         container: {
@@ -32,7 +34,7 @@ export const History = ()=>{
     return (
         <View style={style.container}>
             <View style={style.tabBar}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.goBack()}>
                     <MaterialIcons  name="chevron-left" color={'white'} size={55}/>
                 </TouchableOpacity>
             </View>

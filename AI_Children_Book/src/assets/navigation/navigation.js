@@ -6,6 +6,8 @@ import { SignIn } from '../../screens/signin';
 import { Home } from '../../screens/home';
 import { TabNavigator } from './tab.navigation';
 import { History } from '../../screens/history';
+import { Purchase } from '../../screens/purchase';
+import { Payment } from '../../screens/payment';
 
 
 
@@ -18,12 +20,14 @@ export const Navigation = ()=>{
 
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='history'>
+            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='signin'>
                 <Stack.Screen name='signup' component={SignUp}/>
                 <Stack.Screen name='signin' component={SignIn}/>
                 <Stack.Screen name='home' component={Home}/>
                 <Stack.Screen name='profil' component={TabNavigator}/>
                 <Stack.Screen name='history' component={History}/>
+                <Stack.Screen name='purchase' component={Purchase}/>
+                <Stack.Screen name='payment' component={Payment}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

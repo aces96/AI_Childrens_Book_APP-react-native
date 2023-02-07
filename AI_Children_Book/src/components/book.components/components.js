@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import Illustration from '../../assets/images/nothingFound.svg'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -10,12 +11,15 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const NothingFoundIllustration = ()=>{
 
+    const navigation = useNavigation()
+
     const style=StyleSheet.create({
         container: {
             width: '90%',
             height: '60%',
             alignSelf: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginVertical: 100
         },
         button: {
             width: '90%',
@@ -39,7 +43,7 @@ export const NothingFoundIllustration = ()=>{
                 try generating a new story or open a saved one
             </Text>
 
-            <TouchableOpacity style={style.button}>
+            <TouchableOpacity onPress={()=>navigation.navigate('story')} style={style.button}>
                 <Text style={{fontSize: 20, fontFamily: 'Roboto-Medium', color: 'white'}}>
                     Generate story
                 </Text>
@@ -54,14 +58,16 @@ export const ImageCover = ()=>{
 
     const style = StyleSheet.create({
         container: {
-            width:  150,
-            height: 200,
+            width:  '100%',
+            height: '90%',
             alignSelf: 'center',
             borderWidth: 2,
             borderColor: '#009EFF',
             elevation: 10,
             shadowColor: '#009EFF',
-            marginVertical: 10
+            marginVertical: 15,
+            opacity: 0.6,
+            backgroundColor: 'rgba(0,158,255,0.6)'
         },
         image: {
             width: '100%',
@@ -73,40 +79,58 @@ export const ImageCover = ()=>{
 
     return (
         <View style={style.container}>
-            <Image style={style.image} source={require('../../assets/images/cover.jpg')}/>
+            <Image style={style.image} source={require('../../assets/images/background.png')}/>
         </View>
     )
 }
 
 
-export const StoryTitle = ()=>{
+export const StoryTitle = (props)=>{
     const style = StyleSheet.create({
         title: {
-            fontSize: 25,
+            fontSize: 35,
             fontFamily: 'ACaslonPro-BoldItalic',
-            color: 'black',
-            marginVertical: 10
+            color: 'white',
+            marginVertical: 10,
+        },
+        container: {
+            width: 320,
+            height: 100,
+            alignSelf: 'center',
+            position: 'absolute',
+            zIndex: 4,
+            justifyContent: 'center',
+            alignItems: 'center',
+            top: 200,
+            borderWidth: 2,
+            borderColor: '#009EFF',
+            backgroundColor: 'rgba(0,158,255,0.2)',
+            elevation: 10,
+            shadowColor: 'white'
         }
 
     })
 
 
     return(
-        <Text style={style.title}>
-            this is the story title
-        </Text>
+        <View style={style.container}>
+            <Text style={style.title}>
+                {props.title}
+            </Text>
+        </View>
     ) 
 }
 
 
-export const PageComponent = ()=>{
+export const PageComponent = (props)=>{
 
     const style = StyleSheet.create({
         container: {
             width:'100%',
-            height: 450,
+            height: '90%',
             flexDirection: 'row',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            marginVertical: 20
         },
         button: {
             width: '12%',
@@ -139,7 +163,7 @@ export const PageComponent = ()=>{
 
             <WoodFrame />
             <View style={style.content}>
-                <TouchableOpacity style={style.button}>
+                <TouchableOpacity onPress={()=>props.handleLeft()} style={style.button}>
                     <MaterialIcons color={'#009EFF'} size={50} name="chevron-left"/>
                 </TouchableOpacity>
 
@@ -149,7 +173,7 @@ export const PageComponent = ()=>{
                     </Text>
                 </View>
 
-                <TouchableOpacity style={style.button}>
+                <TouchableOpacity onPress={()=>props.handleRight()} style={style.button}>
                     <MaterialIcons color={'#009EFF'} size={50} name="chevron-right"/>
                 </TouchableOpacity>
             </View>
@@ -170,11 +194,11 @@ export const WoodFrame = ()=>{
 
     return( 
         <View style={style.container}>
-            <Image style={{width: '100%', height: '100%'}} source={require('../../assets/images/woordFrame.png')}/>
-            <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100}} source={require('../../assets/images/elephant.png')}/>
+            <Image style={{width: '100%', height: '100%'}} source={require('../../assets/images/frame.png')}/>
+            {/* <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100}} source={require('../../assets/images/elephant.png')}/>
             <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100, right: 10}} source={require('../../assets/images/cat.png')}/>
             <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100, right: 10, bottom: 20}} source={require('../../assets/images/girrafeHeart.png')}/>
-            <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 110, left: 10, bottom: 15}} source={require('../../assets/images/girrafe.png')}/>
+            <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 110, left: 10, bottom: 15}} source={require('../../assets/images/girrafe.png')}/> */}
         </View>
     )
 
