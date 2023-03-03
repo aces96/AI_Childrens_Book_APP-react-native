@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import Illustration from '../../assets/images/nothingFound.svg'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -66,8 +66,8 @@ export const ImageCover = ()=>{
             elevation: 10,
             shadowColor: '#009EFF',
             marginVertical: 15,
-            opacity: 0.6,
-            backgroundColor: 'rgba(0,158,255,0.6)'
+            opacity: 0.4,
+            backgroundColor: 'rgb(0,0,0)'
         },
         image: {
             width: '100%',
@@ -88,18 +88,17 @@ export const ImageCover = ()=>{
 export const StoryTitle = (props)=>{
     const style = StyleSheet.create({
         title: {
-            fontSize: 35,
+            fontSize: 25,
             fontFamily: 'ACaslonPro-BoldItalic',
             color: 'white',
-            marginVertical: 10,
+            textAlign: 'center'
         },
         container: {
             width: 320,
-            height: 100,
+            height: 150,
             alignSelf: 'center',
             position: 'absolute',
             zIndex: 4,
-            justifyContent: 'center',
             alignItems: 'center',
             top: 200,
             borderWidth: 2,
@@ -123,6 +122,44 @@ export const StoryTitle = (props)=>{
 
 
 export const PageComponent = (props)=>{
+
+    const [count, setCount] = useState(0)
+    const [story, setStory] = useState([])
+
+    useEffect(()=>{
+
+        console.log("heeeeeeeeere", props.story[1]);
+        const substring = []
+
+        var subStrLength = Math.ceil(props.story[1].length / 5);
+        var subStr1 = props.story[1].slice(0, subStrLength);
+        substring.push(subStr1)
+        var subStr2 = props.story[1].slice(subStrLength, subStrLength * 2);
+        substring.push(subStr2)
+        var subStr3 = props.story[1].slice(subStrLength * 2, subStrLength * 3);
+        substring.push(subStr3)
+        var subStr4 = props.story[1].slice(subStrLength * 3, subStrLength * 4);
+        substring.push(subStr4)
+
+        var subStr5 = props.story[1].slice(subStrLength * 4);
+        substring.push(subStr5)
+
+
+        setStory(substring)
+
+        console.log(substring[0]);
+        
+        // let data =  [];
+        // console.log(textLength);
+
+
+        // for (let i = 0; i < props.story[1].length; i += textLength.toFixed(0)) {
+        //     data.push(props.story[1].slice(i, i + textLength.toFixed(0)));
+        // }
+        // console.log('heeeeeeeeeeeere',props.story[1].split('.'));
+    },[])
+    
+
 
     const style = StyleSheet.create({
         container: {
@@ -160,7 +197,6 @@ export const PageComponent = (props)=>{
 
     return (
         <View style={style.container} >
-
             <WoodFrame />
             <View style={style.content}>
                 <TouchableOpacity onPress={()=>props.handleLeft()} style={style.button}>
@@ -169,13 +205,14 @@ export const PageComponent = (props)=>{
 
                 <View style={style.page}>
                     <Text style={{fontSize: 20, color: 'black', textAlign: 'center', lineHeight: 30, fontFamily: 'Solitreo-Regular'}}>
-                        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée.
+                        {story[props.count-1]}
                     </Text>
                 </View>
 
                 <TouchableOpacity onPress={()=>props.handleRight()} style={style.button}>
                     <MaterialIcons color={'#009EFF'} size={50} name="chevron-right"/>
                 </TouchableOpacity>
+
             </View>
         </View>
     )

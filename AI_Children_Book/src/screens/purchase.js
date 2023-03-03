@@ -1,15 +1,15 @@
-import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from "react-native";
+import React, {useEffect, useState} from "react";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { BasicPack, PremiumPack, UltimatePack } from "../components/purchase.component/component";
 import { useNavigation } from "@react-navigation/native";
+import { useStripe, usePaymentSheet } from "@stripe/stripe-react-native";
+import axios from "axios";
 
 
 
 export const Purchase = ()=>{
 
-    const navigation = useNavigation()
-    
     const style = StyleSheet.create({
         container: {
             width: '100%',
@@ -43,6 +43,66 @@ export const Purchase = ()=>{
             
         }
     })
+    const navigation = useNavigation()
+    const { initPaymentSheet, presentPaymentSheet } = useStripe();
+    const [loading, setLoading] = useState(false);
+
+    const fetchPaymentSheetParams = async () => {
+        const response = await axios.post('http://192.168.1.102:8080/api/payment-sheet')
+        const { paymentIntent, ephemeralKey, customer} =  response.data;
+
+        console.log('heeeeeeeeeeeeere',ephemeralKey);
+    
+        return {
+          paymentIntent,
+          ephemeralKey,
+          customer,
+        };
+      };
+
+      const initializePaymentSheet = async () => {
+        const {
+          paymentIntent,
+          ephemeralKey,
+          customer,
+          publishableKey,
+        } = await fetchPaymentSheetParams();
+    
+        const { error } = await initPaymentSheet({
+        merchantDisplayName: 'achraf',
+          customerId: customer,
+          customerEphemeralKeySecret: ephemeralKey,
+          paymentIntentClientSecret: paymentIntent,
+          // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
+          //methods that complete payment after a delay, like SEPA Debit and Sofort.
+          allowsDelayedPaymentMethods: true,
+          defaultBillingDetails: {
+            name: 'Jane Doe',
+          }
+        });
+        if (!error) {
+            setLoading(true)
+                    }
+      };
+      const openPaymentSheet = async () => {
+          console.log('what the fuck');
+          const data = await presentPaymentSheet();
+          console.log('daaaaaaaaaaaaaaaaaata', data);
+    
+        if (error) {
+        Alert.alert(`Error code: ${error.code}`, error.message);
+        } else {
+        Alert.alert('Success', 'Your order is confirmed!');
+        }
+      };
+
+      useEffect(() => {
+        initializePaymentSheet();
+        console.log('here');
+      }, []);
+
+    
+    
 
 
     return (
@@ -58,8 +118,8 @@ export const Purchase = ()=>{
             </Text>
 
             <ScrollView style={style.packContainer}>
-                <BasicPack />
-                <PremiumPack />
+                <BasicPack handleClick={openPaymentSheet} />
+                <PremiumPack handleClick={openPaymentSheet} />
                 <UltimatePack />
 
                 <TouchableOpacity onPress={()=>navigation.navigate('payment')} style={style.button}>

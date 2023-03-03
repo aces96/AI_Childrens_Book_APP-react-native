@@ -25,7 +25,7 @@ function App(){
 
   return (
     <Provider store={store}>
-      <StripeProvider  publishableKey={STRIPE_KEY}>
+      <StripeProvider stripeAccountId='acct_1L8qxeJhRzifapm9'  publishableKey={STRIPE_KEY}>
         <SafeAreaView  style={{flex: 1}}>
           <StatusBar
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}

@@ -8,6 +8,7 @@ import { TabNavigator } from './tab.navigation';
 import { History } from '../../screens/history';
 import { Purchase } from '../../screens/purchase';
 import { Payment } from '../../screens/payment';
+import { SplashScreen } from '../../screens/splashScreen';
 
 
 
@@ -20,8 +21,9 @@ export const Navigation = ()=>{
 
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='signin'>
+            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='profil'>
                 <Stack.Screen name='signup' component={SignUp}/>
+                <Stack.Screen name='splashScreen' component={SplashScreen}/>
                 <Stack.Screen name='signin' component={SignIn}/>
                 <Stack.Screen name='home' component={Home}/>
                 <Stack.Screen name='profil' component={TabNavigator}/>

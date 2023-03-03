@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 export const TabNavigator = ()=>{
 
     return (
-        <Tab.Navigator initialRouteName='book' screenOptions={{
+        <Tab.Navigator initialRouteName='settings' screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: 'rgba(0,158,255, 1)',
             tabBarInactiveTintColor: 'rgba(0,0,0,0.7)',

@@ -5,7 +5,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 
 
-export const BasicPack = ()=>{
+export const BasicPack = (props)=>{
 
     const style=StyleSheet.create({
         container: {
@@ -45,7 +45,7 @@ export const BasicPack = ()=>{
 
 
     return (
-        <View style={style.container}>
+        <TouchableOpacity onPress={()=>props.handleClick()} style={style.container}>
             <View style={style.packTitleCont}>
                 <Text style={style.title}>
                     Basic 
@@ -92,11 +92,11 @@ export const BasicPack = ()=>{
                     </Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
-export const PremiumPack = ()=>{
+export const PremiumPack = (props)=>{
 
     const style=StyleSheet.create({
         container: {
@@ -135,7 +135,7 @@ export const PremiumPack = ()=>{
 
 
     return (
-        <View style={style.container}>
+        <TouchableOpacity onPress={()=>props.handleClick()} style={style.container}>
             <View style={style.packTitleCont}>
                 <Text style={style.title}>
                     Premium 
@@ -182,7 +182,7 @@ export const PremiumPack = ()=>{
                     </Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -225,7 +225,7 @@ export const UltimatePack = ()=>{
 
 
     return (
-        <View style={style.container}>
+        <TouchableOpacity style={style.container}>
             <View style={style.packTitleCont}>
                 <Text style={style.title}>
                     Ultimate 
@@ -272,6 +272,6 @@ export const UltimatePack = ()=>{
                     </Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }

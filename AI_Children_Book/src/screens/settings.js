@@ -34,6 +34,15 @@ export const Settings = ()=>{
     return (
         <View style={style.container}>
             <View style={style.topBar}></View>
+            <View style={{width: "95%", height: 100, backgroundColor: 'white', alignSelf: 'center', marginTop: 5, elevation: 5, justifyContent: 'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 25, fontFamily: 'Roboto-Bold', color: '#009EFF'}}>
+                    DesignGod
+                </Text>
+
+                <Text style={{fontSize: 15, fontFamily: 'Roboto-Bold', color: 'black'}}>
+                    subscription type: free
+                </Text>
+            </View>
             <Text style={style.title}>
                 Settings
             </Text>

@@ -1,7 +1,7 @@
-import React, {useRef, useState} from "react";
+import React, {useState} from "react";
 import { View, StyleSheet, TextInput, Text,TouchableOpacity } from "react-native";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
+import {Picker} from '@react-native-picker/picker';
 
 
 
@@ -9,7 +9,9 @@ import { AutocompleteDropdown } from 'react-native-autocomplete-dropdown';
 
 
 
-export const ThemeComponent = ()=>{
+export const ThemeComponent = (props)=>{
+    const [value, setValue] = useState(undefined);
+    const [selected, setSelected] = useState(false)
 
 
 
@@ -33,6 +35,7 @@ export const ThemeComponent = ()=>{
         buttonsCont: {
             flex: 1,
             paddingVertical: 8,
+            
         },
         button: {
             backgroundColor: 'white',
@@ -44,15 +47,21 @@ export const ThemeComponent = ()=>{
             borderWidth: 1,
             borderColor: '#009EFF',
             alignSelf: 'center',
-            justifyContent: 'center',
-            alignItems: 'center'
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            flexDirection: 'row'
         },
         text: {
             fontSize: 20,
             fontFamily: 'Roboto-Medium',
             color: '#009EFF'
-        }
+        },
+        
     })
+
+    const Modal = ()=>{
+
+    }
 
     // const handleClick = ()=>{
 
@@ -65,39 +74,32 @@ export const ThemeComponent = ()=>{
             <Text style={style.title}>
                 Theme:
             </Text>
-            <AutocompleteDropdown
-            clearOnFocus={false}
-            closeOnBlur={true}
-            closeOnSubmit={false}
-            initialValue={{ id: '2' }} // or just '2'
-            // onSelectItem={setSelectedItem}
-            dataSet={[
-                { id: '1', title: 'Alpha' },
-                { id: '2', title: 'Beta' },
-                { id: '3', title: 'Gamma' },
-            ]}
-            />
-            <View style={style.buttonsCont}>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>
-                        Action
-                    </Text>
+            <View style={{borderWidth: 1, borderColor: '#009EFF', borderRadius: 10 }}>
+                <TouchableOpacity onPress={()=>props.openModal()} activeOpacity={0.7}  style={{height: 50, width: '95%', backgroundColor: 'white', alignItems: 'flex-end', justifyContent: 'center', alignSelf: 'center'}}>
+                    <MaterialIcons size={30} color='#009EFF' name="arrow-drop-down"/>
                 </TouchableOpacity>
             </View>
-
+            <View style={style.buttonsCont}>
+                {props.selected &&
+                    
+                    <TouchableOpacity activeOpacity={1} style={style.button}>
+                        <Text style={style.text}>
+                            {props.value}
+                        </Text>
+                        <TouchableOpacity onPress={()=>props.removeTheme()}>
+                            <MaterialIcons  name="close" size={30} color='#009EFF'/>
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+                
+                }
+            </View>
         </View>
     )
 }
 
 
-export const CharacterComponent = ()=>{
-
-
-    const fakeData = {
-        id: 'some uniq string id',
-        title: 'list item title'
-    }
-
+export const CharacterComponent = (props)=>{
+    const [character, setCharacter] = useState('');
 
 
     const style = StyleSheet.create({
@@ -129,7 +131,8 @@ export const CharacterComponent = ()=>{
             elevation: 5,
             margin: 5,
             borderWidth: 1,
-            borderColor: '#009EFF'
+            borderColor: '#009EFF',
+            flexDirection: 'row'
         },
         text: {
             fontSize: 20,
@@ -150,45 +153,33 @@ export const CharacterComponent = ()=>{
                 Characters:
             </Text>
 
-            <AutocompleteDropdown
-            clearOnFocus={false}
-            closeOnBlur={true}
-            closeOnSubmit={false}
-            initialValue={{ id: '2' }} // or just '2'
-            // onSelectItem={setSelectedItem}
-            dataSet={[
-                { id: '1', title: 'Alpha' },
-                { id: '2', title: 'Beta' },
-                { id: '3', title: 'Gamma' },
-            ]}
-            />
+            <View style={{borderWidth: 1, borderColor: '#009EFF', borderRadius: 10, flexDirection: 'row', alignItems: 'center' }}>
+                <TextInput value={props.value} onChangeText={(e)=>{props.setCharacter(e)}} placeholderTextColor={'rgba(0,0,0,0.7)'}  placeholder="father: sam" style={{width: '90%', height: 50, color: 'black'}}/>
+                <TouchableOpacity onPress={()=>props.handleCharacter()}>
+                    <MaterialIcons name="done" size={25} color='#009EFF'/>
+                </TouchableOpacity>
+            </View>
 
             <View style={style.buttonsCont}>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>
-                        Achraf
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>
-                        Jack
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>
-                        lora
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>
-                        samuel
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.text}>
-                        sara
-                    </Text>
-                </TouchableOpacity>
+
+                {
+                    props.characters.map((es)=>{
+                        return (
+                            <TouchableOpacity activeOpacity={1} style={style.button}>
+                            <Text style={style.text}>
+                                {es}
+                            </Text>
+                            <TouchableOpacity onPress={()=>{
+                                props.setCharacterRem({es})
+                                props.removeCharacter()
+                            }}>
+                                <MaterialIcons  name="close" size={30} color='#009EFF'/>
+                            </TouchableOpacity>
+                            </TouchableOpacity>
+                        )
+
+                    })
+                }
             </View>
 
         </View>
@@ -197,11 +188,7 @@ export const CharacterComponent = ()=>{
 
 
 
-export const PromptComponent = ()=>{
-
-
-
-
+export const PromptComponent = (props)=>{
 
 
     const style = StyleSheet.create({
@@ -228,7 +215,8 @@ export const PromptComponent = ()=>{
             marginVertical: 5,
             borderWidth: 2,
             borderColor: '#009EFF',
-            borderRadius: 15
+            borderRadius: 15,
+            color: 'black'
         }
 
 
@@ -246,7 +234,10 @@ export const PromptComponent = ()=>{
                 Prompt:
             </Text>
 
-            <TextInput multiline={true} placeholder="enter your prompt" placeholderTextColor={'rgba(0,0,0,0.6)'} style={style.input}/>
+            <TextInput value={props.prompt} onChangeText={(e)=>{
+                props.handlePrompt(e)
+
+            }} multiline={true} placeholder="enter your prompt" placeholderTextColor={'rgba(0,0,0,0.6)'} style={style.input}/>
 
 
 
@@ -256,6 +247,7 @@ export const PromptComponent = ()=>{
         </View>
     )
 }
+
 
 
 

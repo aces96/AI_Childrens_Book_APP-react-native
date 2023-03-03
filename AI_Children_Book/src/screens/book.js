@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { NothingFoundIllustration, ImageCover, StoryTitle, PageComponent } from "../components/book.components/components";
 import { useSelector } from "react-redux";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -10,6 +10,9 @@ import Sound from 'react-native-sound'
 
 
 export const Book = ()=>{
+
+    const [count, setCount] = useState(0)
+
 
     const  flipSound = new Sound('page_flip.mp3', Sound.MAIN_BUNDLE, (error) => {
         if (error) {
@@ -35,7 +38,8 @@ export const Book = ()=>{
         topBar: {
             width: '100%',
             height: 60,
-            backgroundColor: 'rgba(0,158,255,1)'
+            backgroundColor: 'rgba(0,158,255,1)',
+            justifyContent: 'center'
         }
     })
 
@@ -53,6 +57,8 @@ export const Book = ()=>{
                 }
               });
             setStep(step+1)
+            setCount(count+1)
+
         }
         }
 
@@ -68,6 +74,7 @@ export const Book = ()=>{
                 }
             });
             setStep(step-1)
+            setCount(count-1)
         }
         }
 
@@ -81,7 +88,7 @@ export const Book = ()=>{
                 )
             }else {
                 return (
-                    <PageComponent handleLeft={onSwipeRight} handleRight={onSwipeLeft} /> 
+                    <PageComponent count={count} story={story} handleLeft={onSwipeRight} handleRight={onSwipeLeft} /> 
                 )
             }
     }
@@ -92,14 +99,18 @@ export const Book = ()=>{
     return (
         <View style={style.container}>
             <View style={style.topBar}>
-
+                {count > 0 &&
+                    <Text style={{fontSize: 20, color: 'white'}}>
+                        {count}/5
+                    </Text>
+                }
             </View>
 
             {story.length == 0 ?
             
             <NothingFoundIllustration /> 
          :  <GestureRecognizer style={{flex: 1, width: '100%', justifyContent: 'center'}} onSwipeLeft={onSwipeLeft} onSwipeRight={onSwipeRight}>
-                {handleBook()}
+                {handleBook(story)}
             </GestureRecognizer>}
             
         </View>
