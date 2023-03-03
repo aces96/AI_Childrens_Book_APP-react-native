@@ -33,7 +33,8 @@ export const StoryGenerator = ()=>{
         try {
             setLoading(true)
             const generate = await generateStory(prompt, theme, characters)
-            await dispatch(addStory(generate))
+            dispatch(addStory(generate))
+            console.log('data', generate);
             setLoading(false)
             navigation.navigate('book')
         } catch (error) {

@@ -21,7 +21,7 @@ export const Navigation = ()=>{
 
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='profil'>
+            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='splashScreen'>
                 <Stack.Screen name='signup' component={SignUp}/>
                 <Stack.Screen name='splashScreen' component={SplashScreen}/>
                 <Stack.Screen name='signin' component={SignIn}/>

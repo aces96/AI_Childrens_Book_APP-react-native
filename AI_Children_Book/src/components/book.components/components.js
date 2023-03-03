@@ -3,6 +3,8 @@ import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 import Illustration from '../../assets/images/nothingFound.svg'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from "@react-navigation/native";
+import { StringSlice } from "../../assets/textSlice";
+
 
 
 
@@ -111,6 +113,8 @@ export const StoryTitle = (props)=>{
     })
 
 
+
+
     return(
         <View style={style.container}>
             <Text style={style.title}>
@@ -128,26 +132,34 @@ export const PageComponent = (props)=>{
 
     useEffect(()=>{
 
-        console.log("heeeeeeeeere", props.story[1]);
-        const substring = []
-
-        var subStrLength = Math.ceil(props.story[1].length / 5);
-        var subStr1 = props.story[1].slice(0, subStrLength);
-        substring.push(subStr1)
-        var subStr2 = props.story[1].slice(subStrLength, subStrLength * 2);
-        substring.push(subStr2)
-        var subStr3 = props.story[1].slice(subStrLength * 2, subStrLength * 3);
-        substring.push(subStr3)
-        var subStr4 = props.story[1].slice(subStrLength * 3, subStrLength * 4);
-        substring.push(subStr4)
-
-        var subStr5 = props.story[1].slice(subStrLength * 4);
-        substring.push(subStr5)
+        console.log('story', props.story.data);
+        let substring  
 
 
-        setStory(substring)
+        const data  = StringSlice(props.story[1])
+        substring = data
+        setStory(data)
 
-        console.log(substring[0]);
+
+        console.log("heeeeeeeeere", substring);
+
+        // var subStrLength = Math.ceil(props.story[1].length / 5);
+        // var subStr1 = props.story[1].slice(0, subStrLength);
+        // substring.push(subStr1)
+        // var subStr2 = props.story[1].slice(subStrLength, subStrLength * 2);
+        // substring.push(subStr2)
+        // var subStr3 = props.story[1].slice(subStrLength * 2, subStrLength * 3);
+        // substring.push(subStr3)
+        // var subStr4 = props.story[1].slice(subStrLength * 3, subStrLength * 4);
+        // substring.push(subStr4)
+
+        // var subStr5 = props.story[1].slice(subStrLength * 4);
+        // substring.push(subStr5)
+
+
+        // setStory(substring)
+
+        // console.log(substring[0]);
         
         // let data =  [];
         // console.log(textLength);

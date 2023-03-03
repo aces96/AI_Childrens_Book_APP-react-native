@@ -41,7 +41,7 @@ export const signIn = async (email, password)=>{
 
 export const generateStory = async (prompt, themes, character)=>{
         try {
-            const generateStory = await axios.post("http://192.168.1.104:8080/api/generateStory", {
+            const generateStory = await axios.post("http://192.168.1.102:8080/api/generateStory", {
                 character: character,
                 description: prompt,
                 theme: themes
@@ -57,6 +57,6 @@ export const generateStory = async (prompt, themes, character)=>{
                 return data
             
         } catch (error) {
-            return false
+            return error
         }
 }
