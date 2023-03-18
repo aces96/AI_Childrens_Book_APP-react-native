@@ -28,24 +28,27 @@ export const SignUp = ()=>{
         if(fullname == '' || email == '' || password == '' || rePassword == ''){
             setError(true)
             setErrorMessage('please insert all informations')
-        }
-
-        if(!validateEmail(email)){
+        }else if(!validateEmail(email)){
+            setError(true)
             setErrorMessage('please insert a valid email')
-        }
-
-        if(password != rePassword){
+        }else if(password != rePassword){
             setError(true)
             setErrorMessage('please re-type correct password')
-        }
-
-        if(fullname.length > 1 && email.length > 1 && password.length > 1 && rePassword.length > 1){
+        }else if(fullname.length > 1 && email.length > 1 && password.length > 1 && rePassword.length > 1){
             setLoading(true)
             await signUp(fullname, email, password).then((res)=>{
                 setLoading(false)
                 navigation.navigate('signin')
+            }).catch((err)=>{
+                setLoading(false)
+                setError(true)
+                setErrorMessage('something wrong please try again later')
             })
         }
+
+
+
+
     }
 
     const style = StyleSheet.create({

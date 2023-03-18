@@ -4,8 +4,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { BasicPack, PremiumPack, UltimatePack } from "../components/purchase.component/component";
 import { useNavigation } from "@react-navigation/native";
 import { useStripe, usePaymentSheet } from "@stripe/stripe-react-native";
+import { StripeProvider } from '@stripe/stripe-react-native';
 import axios from "axios";
-
+import {STRIPE_KEY} from "@env"
 
 
 export const Purchase = ()=>{
@@ -86,9 +87,7 @@ export const Purchase = ()=>{
       };
       const openPaymentSheet = async () => {
           console.log('what the fuck');
-          const data = await presentPaymentSheet();
-          console.log('daaaaaaaaaaaaaaaaaata', data);
-    
+          const {error} = await presentPaymentSheet();
         if (error) {
         Alert.alert(`Error code: ${error.code}`, error.message);
         } else {
@@ -106,6 +105,8 @@ export const Purchase = ()=>{
 
 
     return (
+        <StripeProvider stripeAccountId='acct_1L8qxeJhRzifapm9'  publishableKey={STRIPE_KEY}>
+
         <View style={style.container}>
             <View style={style.tabBar}>
                 <TouchableOpacity onPress={()=>navigation.goBack()}>
@@ -129,5 +130,6 @@ export const Purchase = ()=>{
                 </TouchableOpacity>
             </ScrollView>
         </View>
+        </StripeProvider>
     )
 }

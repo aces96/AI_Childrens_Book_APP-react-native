@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Modal, Pressable, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Alert, Pressable, ActivityIndicator } from "react-native";
 import { ThemeComponent, CharacterComponent, PromptComponent } from "../components/StoryGener.components.js/components";
 import { useDispatch } from "react-redux";
 import { addStory } from "../assets/redux/slices/story.slice";
@@ -33,10 +33,20 @@ export const StoryGenerator = ()=>{
         try {
             setLoading(true)
             const generate = await generateStory(prompt, theme, characters)
-            dispatch(addStory(generate))
-            console.log('data', generate);
-            setLoading(false)
-            navigation.navigate('book')
+
+                if(generate.status == 200){
+                    const data = [generate.data.title[0].text, generate.data.story[0].text]
+                    dispatch(addStory(data))
+                    setLoading(false)
+                    navigation.navigate('book')
+                }else {
+                    Alert.alert('Error Occurred', 'Sorry, there was an error with your request. Please check your input or try again later.', [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                      ]);
+                }
+
+            console.log('here',generate.status);
+            
         } catch (error) {
             console.log(error);
         }

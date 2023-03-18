@@ -36,7 +36,7 @@ export const SignIn = ()=>{
             fontSize: 40,
             color: 'rgba(0,158,255, 0.6)',
             textAlign: 'center',
-            marginBottom: 20,
+            marginBottom: 10,
             fontFamily: 'Roboto-Bold'
         },
         inputCont: {
@@ -60,8 +60,17 @@ export const SignIn = ()=>{
             setLoading(true)
             signIn(email, password).then((res)=>{
                 setLoading(false)
-                storeData(res.data)
+                const userInfo = {
+                    userId: res.data.user_id,
+                    token: res.data.token
+                }
+                console.log('info', userInfo);
+                storeData(userInfo)
                 navigation.navigate('home')
+            }).catch((err)=>{
+                setLoading(false)
+                setError(true)
+                setErrorMessage('something wrong, please check your credentiels and try again or tray again later')
             })
         }
     }
@@ -92,13 +101,12 @@ export const SignIn = ()=>{
                                 Are you new here ?   <Text onPress={()=>navigation.navigate('signup')} style={{color: '#009EFF', textDecorationLine: 'underline'}}>Sign Up</Text>
                             </Text>
                         </View>
-
+                        {error && 
+                            <Text style={{fontSize: 15, textAlign: 'center', color: 'rgb(255,148,148)'}}>
+                                {errorMessage}
+                            </Text>
+                        }
                     </View>
-                    {error && 
-                        <Text style={{fontSize: 15, textAlign: 'center', color: 'rgb(255,148,148)'}}>
-                            {errorMessage}
-                        </Text>
-                    }
             </View>
         </KeyboardAwareScrollView>
     )

@@ -43,9 +43,13 @@ export const BasicPack = (props)=>{
         },
     })
 
+    const data = {
+        price: "10$",
+    }
+
 
     return (
-        <TouchableOpacity onPress={()=>props.handleClick()} style={style.container}>
+        <TouchableOpacity onPress={()=>props.handleClick(data)} style={style.container}>
             <View style={style.packTitleCont}>
                 <Text style={style.title}>
                     Basic 

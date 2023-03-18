@@ -10,8 +10,6 @@ import {
   View,
 } from 'react-native';
 import { Navigation } from './src/assets/navigation/navigation';
-import { StripeProvider } from '@stripe/stripe-react-native';
-import {STRIPE_KEY} from "@env"
 import { Provider } from 'react-redux'
 import { store } from './src/assets/redux/store';
 
@@ -25,7 +23,6 @@ function App(){
 
   return (
     <Provider store={store}>
-      <StripeProvider stripeAccountId='acct_1L8qxeJhRzifapm9'  publishableKey={STRIPE_KEY}>
         <SafeAreaView  style={{flex: 1}}>
           <StatusBar
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
@@ -34,7 +31,6 @@ function App(){
           <Navigation/>
 
         </SafeAreaView>
-      </StripeProvider>
     </Provider>
   );
 }

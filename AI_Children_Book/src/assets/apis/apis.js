@@ -9,7 +9,7 @@ import {storeData} from '../storage/storage'
 export const signUp = async (fullname, email,password)=>{
 
 
-    const request = await axios.post("http://192.168.1.104:8080/api/signup", {
+    const request = await axios.post("http://192.168.1.102:8080/api/signup", {
         fullname: fullname,
         email: email,
         password: password
@@ -26,7 +26,9 @@ export const signUp = async (fullname, email,password)=>{
 
 
 export const signIn = async (email, password)=>{
-    const request = await axios.post("http://192.168.1.104:8080/api/signin", {
+    console.log('requeeest');
+
+    const request = await axios.post("http://192.168.1.102:8080/api/signin", {
         email: email,
         password: password
     }, {
@@ -35,6 +37,11 @@ export const signIn = async (email, password)=>{
             'Accept': "application/json",
             }  
     })
+
+
+    console.log('requeeest',request.data);
+
+
 
     return request
 }
@@ -52,9 +59,9 @@ export const generateStory = async (prompt, themes, character)=>{
                     }  
             })
 
-            const data =  [generateStory.data.title.choices[0].text, generateStory.data.story.choices[0].text]
+            // const data =  [generateStory.data.title.choices[0].text, generateStory.data.story.choices[0].text]
 
-                return data
+                return generateStory
             
         } catch (error) {
             return error
