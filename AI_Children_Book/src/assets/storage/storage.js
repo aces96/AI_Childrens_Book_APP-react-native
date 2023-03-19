@@ -20,3 +20,23 @@ export const getData = async () => {
       return e
     }
 }
+
+
+export const storiesHistory = async(value)=>{
+  try {
+    const jsonValue = JSON.stringify(value)
+    await AsyncStorage.setItem('history', jsonValue)
+  } catch (e) {
+    return e
+  }
+}
+
+
+export const getStoriesHistory = async ()=>{
+  try {
+    const jsonValue = await AsyncStorage.getItem('history')
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch(e) {
+    return e
+  }
+}

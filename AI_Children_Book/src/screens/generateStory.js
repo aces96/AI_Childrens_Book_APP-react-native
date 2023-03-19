@@ -1,16 +1,36 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView, Alert, Pressable, ActivityIndicator } from "react-native";
 import { ThemeComponent, CharacterComponent, PromptComponent } from "../components/StoryGener.components.js/components";
 import { useDispatch } from "react-redux";
 import { addStory } from "../assets/redux/slices/story.slice";
 import { useNavigation } from "@react-navigation/native";
 import { generateStory } from "../assets/apis/apis";
+import { storiesHistory, getStoriesHistory } from "../assets/storage/storage";
 
 
 
 export const StoryGenerator = ()=>{
 
+    const [history, setHistory] = useState([])
+
     const dispatch = useDispatch()
+    const getHistory = async ()=>{
+        const stories = await getStoriesHistory()
+        if(stories == null){
+            setHistory([])
+        }else {
+            setHistory(stories.content)
+        }
+    }
+    const load = async ()=>{
+        await getHistory()
+    }
+    useEffect(()=>{
+        load()
+    },[])
+
+
+
 
     const [characterInputValue, setCharacterInputValue] = useState('')
     const [loading, setLoading] = useState(false)
@@ -35,21 +55,37 @@ export const StoryGenerator = ()=>{
             const generate = await generateStory(prompt, theme, characters)
 
                 if(generate.status == 200){
-                    const data = [generate.data.title[0].text, generate.data.story[0].text]
-                    dispatch(addStory(data))
+                    const data = [generate.data.title[0].text, generate.data.story[0].text, new Date().toISOString().slice(0, 10)]
+                    const array = [];
+                    if(history.length == 0){
+                        array.push(data)
+                    }else {
+                        await history.map((e)=>{
+                            array.push(e)
+                        })
+                        await array.push(data)
+                    }
+                    const histories = {
+                        content : array
+                    }
+                    await dispatch(addStory(data))
+                    await storiesHistory(histories)
                     setLoading(false)
                     navigation.navigate('book')
                 }else {
                     Alert.alert('Error Occurred', 'Sorry, there was an error with your request. Please check your input or try again later.', [
                         {text: 'OK', onPress: () => console.log('OK Pressed')},
-                      ]);
+                    ]);
                 }
 
             console.log('here',generate.status);
             
         } catch (error) {
             console.log(error);
-        }
+            setLoading(false)
+            Alert.alert('Error Occurred', 'Sorry, there was an error with your request. Please check your input or try again later.', [
+                {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]);        }
     }
 
     const navigation = useNavigation()
