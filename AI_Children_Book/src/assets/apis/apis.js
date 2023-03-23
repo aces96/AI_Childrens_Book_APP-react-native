@@ -9,7 +9,7 @@ import {storeData} from '../storage/storage'
 export const signUp = async (fullname, email,password)=>{
 
 
-    const request = await axios.post("http://192.168.1.102:8080/api/signup", {
+    const request = await axios.post("https://summerfoxstorytime.com/api/signup", {
         fullname: fullname,
         email: email,
         password: password
@@ -28,7 +28,7 @@ export const signUp = async (fullname, email,password)=>{
 export const signIn = async (email, password)=>{
     console.log('requeeest');
 
-    const request = await axios.post("http://192.168.1.102:8080/api/signin", {
+    const request = await axios.post("https://summerfoxstorytime.com/api/signin", {
         email: email,
         password: password
     }, {
@@ -48,7 +48,7 @@ export const signIn = async (email, password)=>{
 
 export const generateStory = async (prompt, themes, character)=>{
         try {
-            const generateStory = await axios.post("http://192.168.1.102:8080/api/generateStory", {
+            const generateStory = await axios.post("https://summerfoxstorytime.com/api/generateStory", {
                 character: character,
                 description: prompt,
                 theme: themes
