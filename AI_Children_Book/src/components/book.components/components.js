@@ -56,7 +56,7 @@ export const NothingFoundIllustration = ()=>{
 
 
 
-export const ImageCover = ()=>{
+export const ImageCover = (props)=>{
 
     const style = StyleSheet.create({
         container: {
@@ -81,7 +81,7 @@ export const ImageCover = ()=>{
 
     return (
         <View style={style.container}>
-            <Image style={style.image} source={require('../../assets/images/background.png')}/>
+            <Image style={style.image} source={{uri: props.image}}/>
         </View>
     )
 }
@@ -209,14 +209,14 @@ export const PageComponent = (props)=>{
 
     return (
         <View style={style.container} >
-            <WoodFrame />
+            <WoodFrame image={props.image}/>
             <View style={style.content}>
                 <TouchableOpacity onPress={()=>props.handleLeft()} style={style.button}>
                     <MaterialIcons color={'#009EFF'} size={50} name="chevron-left"/>
                 </TouchableOpacity>
 
                 <View style={style.page}>
-                    <Text style={{fontSize: 20, color: 'black', textAlign: 'center', lineHeight: 30, fontFamily: 'Solitreo-Regular'}}>
+                    <Text style={{fontSize: 20, color: 'white', textAlign: 'center', lineHeight: 30, fontFamily: 'Solitreo-Regular'}}>
                         {story[props.count-1]}
                     </Text>
                 </View>
@@ -231,7 +231,7 @@ export const PageComponent = (props)=>{
 }
 
 
-export const WoodFrame = ()=>{
+export const WoodFrame = (props)=>{
     const style = StyleSheet.create({
         container: {
             width: '100%',
@@ -243,7 +243,7 @@ export const WoodFrame = ()=>{
 
     return( 
         <View style={style.container}>
-            <Image style={{width: '100%', height: '100%'}} source={require('../../assets/images/frame.png')}/>
+            <Image style={{width: '100%', height: '100%'}} source={{uri: props.image}}/>
             {/* <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100}} source={require('../../assets/images/elephant.png')}/>
             <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100, right: 10}} source={require('../../assets/images/cat.png')}/>
             <Image style={{position: 'absolute', zIndex: 1, width: 100, height: 100, right: 10, bottom: 20}} source={require('../../assets/images/girrafeHeart.png')}/>

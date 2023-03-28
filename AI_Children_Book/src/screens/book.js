@@ -82,13 +82,13 @@ export const Book = ()=>{
             if(step == 0 ){
                 return (
                     <View>
-                        <ImageCover /> 
+                        <ImageCover image={story[3]} /> 
                         <StoryTitle title={story[0]} /> 
                     </View>
                 )
             }else {
                 return (
-                    <PageComponent count={count} story={story} handleLeft={onSwipeRight} handleRight={onSwipeLeft} /> 
+                    <PageComponent image={story[3]} count={count} story={story} handleLeft={onSwipeRight} handleRight={onSwipeLeft} /> 
                 )
             }
     }

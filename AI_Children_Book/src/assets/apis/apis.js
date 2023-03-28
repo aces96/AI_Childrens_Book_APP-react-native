@@ -48,7 +48,7 @@ export const signIn = async (email, password)=>{
 
 export const generateStory = async (prompt, themes, character)=>{
         try {
-            const generateStory = await axios.post("https://summerfoxstorytime.com/api/generateStory", {
+            const generateStory = await axios.post("http://summerfoxstorytime.com:8080/api/generateStory", {
                 character: character,
                 description: prompt,
                 theme: themes

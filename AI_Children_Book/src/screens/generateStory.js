@@ -41,12 +41,14 @@ export const StoryGenerator = ()=>{
     const [themeSelected, setThemeSelected] = useState(false)
     const [openModal, setOpenModal] = useState(false)
     const [data, setData] = useState([
-        {label: 'adventure', value: 'adventure', key: 'adventure'},
-        {label: 'aircraft', value: 'aircraft', key: 'aircraft'},
-        {label: 'american', value: 'american', key: 'american'},
-        {label: 'american', value: 'american', key: 'american'},
-        {label: 'american', value: 'american', key: 'american'},
-        {label: 'american', value: 'american', key: 'american'},
+        {label: 'Adventure', value: 'Adventure', key: 'Adventure'},
+        {label: 'Aircraft', value: 'Aircraft', key: 'Aircraft'},
+        {label: 'American', value: 'American', key: 'American'},
+        {label: 'Aircraft', value: 'Aircraft', key: 'Aircraft'},
+        {label: 'Animals', value: 'Animals', key: 'Animals'},
+        {label: 'Antarctica', value: 'Antarctica', key: 'Antarctica'},
+        {label: 'Australia', value: 'Australia', key: 'Australia'},
+        {label: 'Ballet', value: 'Ballet', key: 'Ballet'},
     ])
 
     const handleGenerate = async ()=>{
@@ -54,8 +56,10 @@ export const StoryGenerator = ()=>{
             setLoading(true)
             const generate = await generateStory(prompt, theme, characters)
 
+                console.log('geeeeeeeeeeeeeeeeeeeeeeeeeee', generate.data.image);
+
                 if(generate.status == 200){
-                    const data = [generate.data.title[0].text, generate.data.story[0].text, new Date().toISOString().slice(0, 10)]
+                    const data = [generate.data.title[0].text, generate.data.story[0].text, new Date().toISOString().slice(0, 10), generate.data.image]
                     const array = [];
                     if(history.length == 0){
                         array.push(data)
